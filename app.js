@@ -7,7 +7,9 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
+import mongoose from "mongoose";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -31,6 +33,8 @@ import "./passport";
 
 const app = express(); // const app = createApplication();
 
+const CookieStore = MongoStore(session);
+
 app.use(helmet()); // response header에 보안관련된 항목을 추가해줌.
 // app.set("views","views"); // view 폴더 지정.
 app.set("view engine", "pug"); // ejs, pug등 view engine설정
@@ -43,8 +47,10 @@ app.use(morgan("dev")); // log 두도잘몰라
 app.use(session({
     secret: process.env.COOKIE_SECRET,
     resave: true,
-    saveUninitialized: false
-}))
+    saveUninitialized: false,
+    store: new CookieStore({ mongooseConnection: mongoose.connection })
+    })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
