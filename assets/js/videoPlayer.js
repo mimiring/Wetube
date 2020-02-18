@@ -18,15 +18,17 @@ function handlePlayClick() {
 }
 
 function handleVolumeClick() {
+    let value;
     if(videoPlayer.muted) {
         videoPlayer.muted = false;
-        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
-        volumeRange.value = videoPlayer.volume; //mute한다고해서 volume값이 없어지는 것이 아니고 handleDrag()가 기억하고 있다가 돌려줌
+        value = videoPlayer.volume;
+        //mute한다고해서 volume값이 없어지는 것이 아니고 handleDrag()가 기억하고 있다가 돌려줌
     } else {
-        volumeRange.value = 0;
+        value = 0;
         videoPlayer.muted = true;
-        volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
     }
+    volumeRange.value = value; 
+    handleIcon(value);
 }
 
 function exitFullScreen() {
@@ -95,6 +97,12 @@ function handleDrag(event) {
     const {
         target: { value }
     } = event;
+    handleIcon(value)
+    videoPlayer.volume = value;   
+}
+
+
+function handleIcon(value){
     if(value >= 0.6) {
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
     } else if(value >= 0.2) {
@@ -104,8 +112,6 @@ function handleDrag(event) {
     } else {
         volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>'
     }
-    videoPlayer.volume = value;
-    
 }
 
 function init() {
