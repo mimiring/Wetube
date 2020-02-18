@@ -29,6 +29,7 @@ const app = express(); // const app = createApplication();
 app.use(helmet()); // response header에 보안관련된 항목을 추가해줌.
 // app.set("views","views"); // view 폴더 지정.
 app.set("view engine", "pug"); // ejs, pug등 view engine설정
+app.use("/uploads", express.static("uploads"));
 app.use(cookieParser());
 app.use(bodyParser.json()); // { "name": "mimiring" }
 app.use(bodyParser.urlencoded({ extended: true })); // form 에서 오는 데이터 extended의 기본값이 true / true qs로 쿼리문을 해석하겠다. false querystring으로 해석한다.
