@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
 	try {
@@ -65,9 +66,12 @@ export const videoDetail = async (req, res) => {
 		params: { id }
 	} = req;
 	try {
-		const video = await Video.findById(id).populate('creator');
+		const video = await Video.findById(id)
+			.populate('creator')
+			.populate('comments');
 		res.render("videoDetail", { pageTitle: video.title, video });
 	} catch (error) {
+		console.log(error);
 		res.redirect(routes.home); //유효하지 않은 id값의 URL로 이동 시 home으로 redirect
 	}
 }
@@ -134,6 +138,29 @@ export const postRegisterView = async(req, res) => {
 		res.status(200); //okay를 의미함. browser 내 network - status에서 확인 가능
 	} catch(error) {
 		res.statusCode(400);
+	} finally {
+		res.end();
+	}
+};
+
+// Add Comment
+export const postAddComment = async(req, res) => {
+	const {
+		params: { id },
+		body: { comment },
+		user
+	} = req;
+	try {
+		const video = await Video.findById(id);
+		const newComment = await Comment.create({
+			text: comment,
+			creator: user.id
+		});
+		console.log(newComment);
+		video.comments.push(newComment.id);
+		video.save();
+	} catch(error) {
+		res.status(400);
 	} finally {
 		res.end();
 	}

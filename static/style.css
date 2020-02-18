@@ -172,7 +172,8 @@ textarea,
   font-weight: 600;
   background-color: white;
   max-width: 320px;
-  resize: none; }
+  resize: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
   button::placeholder,
   input:not([type="file"])::placeholder,
   textarea::placeholder,
@@ -424,9 +425,25 @@ a {
     .video-detail_container .video_info .video_description {
       font-size: 16px; }
   .video-detail_container .video_comments {
-    margin-top: 25px; }
+    margin-top: 25px;
+    text-align: center; }
     .video-detail_container .video_comments .video_comment-number {
       font-size: 18px; }
+    .video-detail_container .video_comments .add_comment {
+      margin-top: 25px;
+      width: 100%; }
+      .video-detail_container .video_comments .add_comment input {
+        width: 100%; }
+    .video-detail_container .video_comments .video_comments-list {
+      margin-top: 50px; }
+      .video-detail_container .video_comments .video_comments-list li {
+        background-color: #3498db;
+        color: white;
+        padding: 15px;
+        border-radius: 20px;
+        border-bottom-left-radius: 0px; }
+        .video-detail_container .video_comments .video_comments-list li:not(:last-child) {
+          margin-bottom: 15px; }
 
 .user-profile {
   width: 100%;
