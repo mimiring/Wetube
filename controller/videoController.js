@@ -43,7 +43,7 @@ export const videoDetail = async(req, res) => {
 	} = req;
 	try{
 		const video = await Video.findById(id);
-		res.render("videoDetail", { pageTitle: "Video Detail", video });
+		res.render("videoDetail", { pageTitle: video.title, video });
 	} catch(error) {
 		res.redirect(routes.home); //유효하지 않은 id값의 URL로 이동 시 home으로 redirect
 	}
@@ -74,5 +74,8 @@ export const postEditVideo = async(req, res) => {
 	}
 };
 
-
-export const deleteVideo = (req, res) => res.render("deleteVideo", { pageTitle: "Delete Video" });
+export const deleteVideo = (req, res) => {
+	const {
+		params: { id }
+	} = req;
+};
