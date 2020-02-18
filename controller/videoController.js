@@ -4,7 +4,6 @@ import Video from "../models/Video";
 export const home = async (req, res) => {
 	try {
 		const videos = await Video.find({}).sort({_id: -1});
-		
 		//id 정렬을 -1로 하면 최근에 올린 영상이 위로 올라옴
 		res.render("home", {
 			pageTitle: "Home",
@@ -19,16 +18,19 @@ export const home = async (req, res) => {
 	}
 };
 
-export const search = (req, res) => {
+export const search = async(req, res) => {
 	const {
 		query: { term: searchingBy }
 	} = req;
 	//const searchingBy = req.query.term;
-	res.render("search", {
-		pageTitle: "Search",
-		searchingBy,
-		videos
-	});
+	let videos = []; //비디오가 입력되면 배열값이 바뀌므로(reassign 하므로) const가 아닌 let으로 선언함
+	try {
+		videos = await Video.find({ title: { $regex: searchingBy, $options: "i" }});
+		// 대소문자 구별하지 않고 찾기 위해 option에 i(insensitive. 덜 민감한)값을 줌
+	} catch(error) {
+		console.log(error);
+	}
+	res.render("search", { pageTitle: "Search",	searchingBy, videos});
 };
 
 export const getUpload = (req, res) =>
@@ -58,9 +60,7 @@ export const postUpload = async (req, res) => {
 
 export const videoDetail = async (req, res) => {
 	const {
-		params: {
-			id
-		}
+		params: { id }
 	} = req;
 	try {
 		const video = await Video.findById(id);
@@ -75,9 +75,7 @@ export const videoDetail = async (req, res) => {
 
 export const getEditVideo = async (req, res) => {
 	const {
-		params: {
-			id
-		}
+		params: { id }
 	} = req;
 	try {
 		const video = await Video.findById(id);
@@ -92,21 +90,14 @@ export const getEditVideo = async (req, res) => {
 
 export const postEditVideo = async (req, res) => {
 	const {
-		params: {
-			id
-		},
+		params: { id },
 		body: {
 			title,
 			description
 		}
 	} = req;
 	try {
-		await Video.findOneAndUpdate({
-			_id: id
-		}, {
-			title,
-			description
-		});
+		await Video.findOneAndUpdate({ _id: id }, { title, description });
 		res.redirect(routes.videoDetail(id));
 	} catch (error) {
 		res.redirect(routes.home);
@@ -115,14 +106,12 @@ export const postEditVideo = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
 	const {
-		params: {
-			id
-		}
+		params: { id }
 	} = req;
 	try {
-		await Video.findOneAndRemove({
-			_id: id
-		});
-	} catch (error) {}
+		await Video.findOneAndRemove({_id: id});
+	} catch (error) {
+		console.log(error);
+	}
 	res.redirect(routes.home); // 삭제 되어도 에러가 나도 홈으로 이동하므로 밖으로 빼줌
 };

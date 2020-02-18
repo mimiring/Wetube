@@ -13,6 +13,7 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+        "no-console" : "off"
     },
     extends: ["plugin:prttier/recommended"]
 };
