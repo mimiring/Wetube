@@ -89,6 +89,7 @@ export const getEditVideo = async (req, res) => {
 };
 
 export const postEditVideo = async (req, res) => {
+	console.log('않이익ㄴ되자나요!')
 	const {
 		params: { id },
 		body: {
@@ -105,6 +106,7 @@ export const postEditVideo = async (req, res) => {
 };
 
 export const deleteVideo = async (req, res) => {
+	console.log('삭제요청이왔어용');
 	const {
 		params: { id }
 	} = req;

@@ -1,16 +1,20 @@
 extends layouts/main
 
 block content
-	.video_player
-		video(src=`/${video.fileUrl}`)
-		//video가 서버에 있는 파일이기 때문에 위와 같은 형태로 불러옴
-	.video_info
-		a(href=routes.editVideo(video.id)) Edit Video
-		h5.video_title=video.title
-		span.video_views=video.views
-		p.video_description=video.description
-	.video_comments
-		if video.comments.length === 1
-			span.video_comment-number 1 comment <!--1개면 단수로 comment 라고 써야 되니까-->
-		else
-			span.video_comment-numer #{video.comments.length} comments
+	.video-detail_container
+		.video_player
+			video(src=`/${video.fileUrl}`)
+		.video_info
+			a(href=routes.editVideo(video.id))
+				button Edit video
+			h5.video_title=video.title
+			p.video_description=video.description
+			if video.views === 1
+				span.video_views 1 view
+			else
+				span.video_views #{video.views} views
+		.video_comments
+			if video.comments.length === 1
+				span.video_comment-number 1 comment
+			else
+				span.video_comment-number #{video.comments.length} comments 

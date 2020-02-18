@@ -39,6 +39,7 @@
                     color: $black;
                     font-weight: 600;
                     font-size: 14px;
+                    max-width: none;
                     &::placeholder{
                         font-weight: 300;
                         color: rgba(0, 0, 0, 0.7);
