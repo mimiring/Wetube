@@ -92,6 +92,9 @@ package-lock.json
 # DynamoDB Local files
 .dynamodb/
 
+# video files
+uploads
+
 # 구름 환경 파일들
 .tags
 .tags_result
