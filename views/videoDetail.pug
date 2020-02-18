@@ -2,9 +2,10 @@ extends layouts/main
 
 block content
 	.video_player
-		video(src=`/${video.fileUrl}`);
+		video(src=`/${video.fileUrl}`)
+		//video가 서버에 있는 파일이기 때문에 위와 같은 형태로 불러옴
 	.video_info
+		a(href=routes.editVideo) Edit Video
 		h5.video_title=video.title
 		span.video_views=video.views
 		p.video_description=video.description
-		

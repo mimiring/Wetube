@@ -37,7 +37,6 @@ export const postUpload = async(req, res) => {
 	res.redirect(routes.videoDetail(newVideo.id));
 };
 
-
 export const videoDetail = async(req, res) => {
 	const {
 		params : { id }
@@ -46,8 +45,7 @@ export const videoDetail = async(req, res) => {
 		const video = await Video.findById(id);
 		res.render("videoDetail", { pageTitle: "Video Detail", video });
 	} catch(error) {
-		console.log(error);
-		res.redirect(routes.home);
+		res.redirect(routes.home); //유효하지 않은 id값의 URL로 이동 시 home으로 redirect
 	}
 } 
 
