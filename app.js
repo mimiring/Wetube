@@ -11,16 +11,17 @@ import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 
 
-const app = express();
+const app = express(); // const app = createApplication();
 
-app.use(helmet());
-app.set("view engine", "pug");
+app.use(helmet()); // response header에 보안관련된 항목을 추가해줌.
+// app.set("views","views"); // view 폴더 지정.
+app.set("view engine", "pug"); // ejs, pug등 view engine설정
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(morgan("dev"));
+app.use(bodyParser.json()); // { "name": "mimiring" }
+app.use(bodyParser.urlencoded({ extended: true })); // form 에서 오는 데이터 extended의 기본값이 true / true qs로 쿼리문을 해석하겠다. false querystring으로 해석한다.
+app.use(morgan("dev")); // log 두도잘몰라
 
-app.use(localsMiddleware);
+app.use(localsMiddleware); // middleware는 req -> middleware -> res
 
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);

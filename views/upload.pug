@@ -1,4 +1,10 @@
 extends layouts/main
 
-block contents
-	p edit Video
+block content
+	.form-container
+		form(action=routes.upload, method="post")
+			label(for="videoFile") Video File
+			input(type="file", id="videoFile", name="videoFile")
+			input(type="text", placeholder="title", name="title")
+			textarea(placeholder="Description")
+			input(type="submit", value="Update Video")
