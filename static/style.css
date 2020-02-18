@@ -135,6 +135,12 @@ input {
   input:active {
     outline: none; }
 
+.u-avatar {
+  height: 80px;
+  width: 80px;
+  background-color: #ea232c;
+  border-radius: 50%; }
+
 html,
 body {
   height: 100%; }
@@ -355,4 +361,24 @@ a {
     margin-top: 25px; }
     .video-detail_container .video_comments .video_comment-number {
       font-size: 18px; }
+
+.user-profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column; }
+  .user-profile .user-profile__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 18px; }
+    .user-profile .user-profile__header .profile__username {
+      font-size: 18px;
+      margin-top: 15px; }
+  .user-profile .user-profile__btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .user-profile .user-profile__btns a:not(:last-child) {
+      margin-bottom: 20px; }
 
