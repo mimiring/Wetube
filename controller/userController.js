@@ -44,8 +44,14 @@ export const postLogin = passport.authenticate("local", {
 	successRedirect: routes.home // 로그인 성공한 경우성공해서 홈으로 가는거 같은데 세션유지가 안되는듯! 
 }); //'local' : 설치한 strategy 이름(passport-local)
 
+
+
+export const githubLoginCallback = (accessToken, refreshToken, profile, cb) => {
+	console.log(accessToken, refreshToken, profile, cb);
+}
+
 export const logout = (req, res) => {
-	// To Do: Process Log Out
+	req.logout();
 	res.redirect(routes.home);
 };
 
