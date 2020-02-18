@@ -95,6 +95,8 @@ package-lock.json
 # video files
 uploads
 
+static
+
 # 구름 환경 파일들
 .tags
 .tags_result
