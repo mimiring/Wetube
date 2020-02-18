@@ -24,7 +24,8 @@
   },
   "scripts": {
     "dev:server": "nodemon --exec babel-node init.js --delay 2",
-    "dev:assets": "webpack"
+    "dev:assets": "WEBPACK-ENV=development webpack", // 모드를 설정하기 위함,
+    "build:assets": "WEBPACK-ENV=production webpack"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
