@@ -131,7 +131,7 @@ export const postRegisterView = async(req, res) => {
 		const video = await Video.findById(id);
 		video.views += 1;
 		video.save();
-		res.status(200); //okay를 의미함
+		res.status(200); //okay를 의미함. browser 내 network - status에서 확인 가능
 	} catch(error) {
 		res.statusCode(400);
 	} finally {

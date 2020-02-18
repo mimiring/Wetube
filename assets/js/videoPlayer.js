@@ -7,6 +7,13 @@ const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
 
+const registerView = () => {
+    const videoID = window.location.href.split("/videos")[1];
+    fetch(`/api/${videoID}/view`, {
+        method: "POST"
+    }); //database를 변경해야하면 post
+};
+
 function handlePlayClick() {
     if(videoPlayer.paused) {
         videoPlayer.play();
@@ -91,6 +98,7 @@ function setTotalTime() {
 function handleEnded() {
     videoPlayer.currentTime = 0;
     playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    registerView();
 }
 
 function handleDrag(event) {
@@ -100,7 +108,6 @@ function handleDrag(event) {
     handleIcon(value)
     videoPlayer.volume = value;   
 }
-
 
 function handleIcon(value){
     if(value >= 0.6) {
@@ -125,8 +132,6 @@ function init() {
     videoPlayer.addEventListener("ended", handleEnded);
     volumeRange.addEventListener("input", handleDrag);
 }
-
-
 
 if(videoContainer) {
     init();
