@@ -51,6 +51,7 @@ const routes = {
 			return EDIT_VIDEO;
 		}
 	},
+	editProfile : EDIT_PROFILE,
 	deleteVideo : DELETE_VIDEO,
 };
 
