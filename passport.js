@@ -21,7 +21,7 @@ passport.use(new FacebookStrategy(
   {
     clientID: process.env.FB_ID,
     clientSecret: process.env.FB_SECRET,
-    callbackURL: `https://blue-mule-13.localtunnel.me${
+    callbackURL: `https://chatty-wombat-10.localtunnel.me${
       routes.facebookCallback
     }`,
     profileFields: ["id", "displayName", "photos", "email"],
