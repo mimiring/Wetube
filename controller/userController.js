@@ -46,12 +46,34 @@ export const postLogin = passport.authenticate("local", {
 
 export const githubLogin = passport.authenticate("github");
 
-export const githubLoginCallback = (accessToken, refreshToken, profile, cb) => {
-	console.log(accessToken, refreshToken, profile, cb);
+export const githubLoginCallback = async(_, __, profile, cb) => { // 함수의 parameter 중 사용하지 않는 것들은 _, __ 처리. 자리는 채워야 하므로
+	const {
+		_json: {id, avatar_url: avatarUrl, name, email}
+	} = profile;
+	try {
+		const user = await User.findOne({ email });
+		if(user) {
+			user.githubId = id,
+			user.save();
+			return cb(null, user);
+		} else {
+			const newUser = await User.create({
+			email,
+			name,
+			githubId: id,
+			avatarUrl: avatar_url
+			});
+			return cb(null, newUser);
+		}
+	}
+	catch(errror) {
+		return cb(error);
+	}
 };
+// github 인증 정보를 불러오려면 github의 프로필이 공개되어있어야 함(ex: email이 private이 아닌 public으로)
 
 export const postGithubLogin = (req, res) => {
-	req.send(routes.home);
+	res.redirect(routes.home);
 }
 
 export const logout = (req, res) => {
@@ -63,4 +85,3 @@ export const users = (req, res) => res.render("Users", { pageTitle: "Users" });
 export const userDetail = (req, res) => res.render("userDetail", { pageTitle: "User Detail" });
 export const editProfile = (req, res) => res.render("editProfile", { pageTitle: "Edit Profile" });
 export const changePassword = (req, res) => res.render("changePassword", { pageTitle: "Change Password" });
-
