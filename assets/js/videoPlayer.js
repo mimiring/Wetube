@@ -1,5 +1,5 @@
 const videoContainer = document.getElementById("jsVideoPlayer");
-const videoPlayer = videoContainer.querySelector("video"); //여러 함수에서 사용해야 함
+const videoPlayer = document.querySelector("#jsVideoPlayer video"); //여러 함수에서 사용해야 함
 const playBtn = document.getElementById("jsPlayButton");
 const volumeBtn = document.getElementById("jsVolumeBtn");
 const fullScrnBtn = document.getElementById("jsFullScreen");
