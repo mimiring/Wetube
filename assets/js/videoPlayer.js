@@ -1,10 +1,11 @@
 const videoContainer = document.getElementById("jsVideoPlayer");
-const videoPlayer = document.querySelector("#jsVideoPlayer video"); //여러 함수에서 사용해야 함
+const videoPlayer = videoContainer.querySelector("video"); //여러 함수에서 사용해야 함
 const playBtn = document.getElementById("jsPlayButton");
 const volumeBtn = document.getElementById("jsVolumeBtn");
 const fullScrnBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
+const volumeRange = document.getElementById("jsVolume");
 
 function handlePlayClick() {
     if(videoPlayer.paused) {
@@ -20,7 +21,9 @@ function handleVolumeClick() {
     if(videoPlayer.muted) {
         videoPlayer.muted = false;
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+        volumeRange.value = videoPlayer.volume; //mute한다고해서 volume값이 없어지는 것이 아니고 handleDrag()가 기억하고 있다가 돌려줌
     } else {
+        volumeRange.value = 0;
         videoPlayer.muted = true;
         volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
     }
@@ -74,7 +77,7 @@ const formatDate = seconds => { //시간이 주어졌을 때 00:00:00 형식으�
 };
 
 function getCurrentTime() {
-    currentTime.innerHTML = formatDate(videoPlayer.currentTime);
+    currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
 function setTotalTime() { 
@@ -83,15 +86,41 @@ function setTotalTime() {
     setInterval(getCurrentTime, 1000);// time get은 한 번만 일어나는 이벤트이므로 매 초마다 갱신해줌
 }
 
+function handleEnded() {
+    videoPlayer.currentTime = 0;
+    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
 
+function handleDrag(event) {
+    const {
+        target: { value }
+    } = event;
+    if(value >= 0.6) {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+    } else if(value >= 0.2) {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>'
+    } else if(value <= 0) {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
+    } else {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>'
+    }
+    videoPlayer.volume = value;
+    
+}
 
 function init() {
+    videoPlayer.volume = 0.5; // 설정해줘야 모바일에서도 조정 가능
     playBtn.addEventListener("click", handlePlayClick);
     volumeBtn.addEventListener("click", handleVolumeClick);
     fullScrnBtn.addEventListener("click", goFullScreen);
-    setTotalTime();
-        //metadata가 video가 load 될 때까지 기다렸다가 시간 표기해줌(totalTime을 얻으면 video가 load된 것임)
+    if(videoPlayer.readyState >= 2){
+        setTotalTime();
+    }  // https://bit.ly/2wa3Yjg 참조
+    videoPlayer.addEventListener("ended", handleEnded);
+    volumeRange.addEventListener("input", handleDrag);
 }
+
+
 
 if(videoContainer) {
     init();
