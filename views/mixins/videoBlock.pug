@@ -2,6 +2,7 @@ mixin videoBlock(video = {})
 	.videoBlock
 		a(href=routes.videoDetail(video.id))
 		video.videoBlock_thumnail(src=video.videoFile, controls=true)
-			h4.videoBlock_title=video.title
-			h6.videoBlock_views=video.videoBlock_views
+		h4.videoBlock_title=video.title
+		h6.videoBlock_views=video.views
+		p.videoBlock_description=video.description
 			
