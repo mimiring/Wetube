@@ -345,6 +345,8 @@ a {
     .video-detail_container .video_info button {
       width: 100px;
       margin-bottom: 25px; }
+    .video-detail_container .video_info .video_author a {
+      color: #3498db; }
     .video-detail_container .video_info .video_title,
     .video-detail_container .video_info .video_views,
     .video-detail_container .video_info .video_description {
@@ -371,7 +373,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 18px; }
+    margin-bottom: 50px; }
     .user-profile .user-profile__header .profile__username {
       font-size: 18px;
       margin-top: 15px; }

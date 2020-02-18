@@ -15,7 +15,7 @@ block content
 			else
 				span.video_views #{video.views} views
 			.video_author
-				|Upload by
+				|Upload by 
 				a(href=routes.userDetail(video.creator.id))=video.creator.name
 		.video_comments
 			if video.comments.length === 1
