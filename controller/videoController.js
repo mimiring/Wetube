@@ -121,3 +121,20 @@ export const deleteVideo = async (req, res) => {
 	}
 	res.redirect(routes.home); // 삭제 되어도 에러가 나도 홈으로 이동하므로 밖으로 빼줌
 };
+
+// Register Video View
+export const postRegisterView = async(req, res) => {
+	const {
+		params: { id }
+	} = req;
+	try {
+		const video = await Video.findById(id);
+		video.views += 1;
+		video.save();
+		res.status(200); //okay를 의미함
+	} catch(error) {
+		res.statusCode(400);
+	} finally {
+		res.end();
+	}
+};
