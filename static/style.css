@@ -327,6 +327,7 @@ a {
   .videoPlayer:hover .videoPlayer_controls {
     opacity: 1; }
   .videoPlayer video {
+    width: 100%;
     max-width: 100%; }
   .videoPlayer .videoPlayer_controls {
     opacity: 0;
