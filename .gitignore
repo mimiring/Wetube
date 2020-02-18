@@ -91,3 +91,9 @@ package-lock.json
 
 # DynamoDB Local files
 .dynamodb/
+
+# 구름 환경 파일들
+.tags
+.tags_result
+goorm.manifest
+.env

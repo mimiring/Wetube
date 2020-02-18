@@ -1,3 +1,5 @@
+// import dotenv from "dotenv";
+// dotenv.config();
 import express from "express";
 //const express = require("express");
 import morgan from "morgan";
@@ -9,7 +11,18 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
+// import mongoose from "mongoose";
 
+// const URL = "mongodb+srv://mimiring:" + process.env.MONGOPASSWORD + "@cluster0-nnim0.mongodb.net/test?retryWrites=true&w=majority";
+// console.log(URL);
+
+// mongoose.Promise = global.Promise;
+// mongoose.connect(URL,
+//   { useNewUrlParser: true }
+// );
+// mongoose.connection
+//     .once('open', () => console.log('Connected to MongoLab instance.'))
+//     .on('error', error => console.log('Error connecting to MongoLab:', error));
 
 const app = express(); // const app = createApplication();
 

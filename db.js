@@ -1,51 +1,20 @@
-export const videos = [
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
+
+mongoose.connect(
+	process.env.MONGO_URL, 
 	{
-	id: 232,
-	title: "Awesome",
-	description : "This is sometin what I love",
-	views: 25,
-	videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-	creator: {
-		name: "Mimi",
-		id: 121212,
-		email: "mimi@hey.com",
-		
-		}
-	},
-	{
-	id: 1234,
-	title: "Perfect",
-	description : "This is sometin what I love",
-	views: 15,
-	videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-	creator: {
-		name: "Mimi",
-		id: 121212,
-		email: "mimi@hey.com",
-		
-		}
-	},{
-	id: 47434,
-	title: "Super",
-	description : "This is sometin what I love",
-	views: 35,
-	videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-	creator: {
-		name: "Mimi",
-		id: 121212,
-		email: "mimi@hey.com",
-		
+		useNewUrlParser: true,
+		useFindAndModify: false,
+		useUnifiedTopology: true
 	}
-}, {
-	id: 809145,
-	title: "Cool",
-	description : "This is sometin what I love",
-	views: 37,
-	videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-	creator: {
-		name: "Mimi",
-		id: 121212,
-		email: "mimi@hey.com",
-		
-	}
-}];
+);
+
+const db = mongoose.connection;
+
+const handleOpen = () => console.log("★Connected to DB");
+const handleError = error => console.log(`☆Error on DB Connection: ${error}`);
+
+db.once("open", handleOpen);
+db.on("error", handleError);
