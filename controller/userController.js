@@ -15,9 +15,9 @@ export const getJoin = (req, res) => {
 	res.render("join", { pageTitle: "Join" });
 };
 
-export const postJoin = async(req, res, next) => {
+export const postJoin = async (req, res, next) => {
 	const {
-		body : { name, email, password, password2 }
+		body: { name, email, password, password2 }
 	} = req;
 	if(password != password2) {
 		res.status(400);
@@ -28,6 +28,7 @@ export const postJoin = async(req, res, next) => {
 				name,
 				email
 			});
+			console.log("가입:",user,password);
 			await User.register(user, password);
 			next();
 		} catch(error) {
@@ -40,7 +41,7 @@ export const postJoin = async(req, res, next) => {
 export const getLogin = (req, res) => res.render("login", { pageTitle: "Login" });
 export const postLogin = passport.authenticate("local", {
 	failureRedirect: routes.login, // 로그인 실패한 경우
-	successRedirect: routes.home // 로그인 성공한 경우
+	successRedirect: routes.home // 로그인 성공한 경우성공해서 홈으로 가는거 같은데 세션유지가 안되는듯! 
 }); //'local' : 설치한 strategy 이름(passport-local)
 
 export const logout = (req, res) => {

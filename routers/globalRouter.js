@@ -19,7 +19,10 @@ globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);
 
 globalRouter.get(routes.login, getLogin);
-globalRouter.post(routes.login, postLogin);
+globalRouter.post(routes.login, (req,res,next) => {
+	console.log(req.body);
+	next();
+},postLogin);
 
 globalRouter.get(routes.logout, logout);
 
