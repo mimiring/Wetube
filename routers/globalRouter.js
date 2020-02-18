@@ -13,7 +13,7 @@ import {
 const globalRouter = express.Router();
 
 globalRouter.get(routes.join, getJoin);
-globalRouter.post(routes.join, postJoin);
+globalRouter.post(routes.join, postJoin, postLogin); //회원가입하면 로그인 화면으로 넘어감
 
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);
