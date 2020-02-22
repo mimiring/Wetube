@@ -46,11 +46,11 @@ export const postUpload = async (req, res) => {
 			description
 		},
 		file: {
-			path
+			location //multer가 S3같은 외부의 서버에 file 저장시 file의 location을 받음
 		}
 	} = req;
 	const newVideo = await Video.create({
-		fileUrl: path,
+		fileUrl: location,
 		title,
 		description,
 		creator: req.user.id
