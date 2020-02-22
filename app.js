@@ -15,6 +15,7 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import apiRouter from "./routers/apiRouter";
+// import commentRouter from './routers/commentRouter';
 import routes from "./routes";
 import { SplitChunksPlugin } from "webpack";
 
@@ -61,6 +62,6 @@ app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
 app.use(routes.api, apiRouter);
-
+// app.use(routes.comments, commentRouter); // /comments경로
 
 export default app;

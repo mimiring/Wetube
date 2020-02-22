@@ -34,3 +34,6 @@ block content
 				each comment in video.comments
 					li
 						span=comment.text
+						if comment.creator.equals(loggedUser.id)
+							.delete-comment_btns
+								a(href=`#` data-comment-id=`${comment.id}`) X

@@ -19,6 +19,7 @@ const addComment = comment => {
 
 const sendComment = async comment => {
   const videoId = window.location.href.split("/videos/")[1];
+  // 경로와 메소드를 사용해서 요청을 보냈음.
   const response = await axios({
     url: `/api/${videoId}/comment`,
     method: "POST",
@@ -26,9 +27,11 @@ const sendComment = async comment => {
       comment
     }
   });
+  // 응답을 받았음 status코드가 200이면 코맨트를 추가함.
   if(response.status === 200) {
     addComment(comment); //댓글이 데이터베이스에 추가되면 addComment
   }
+  // 아니면 에러를 표시할 수도 있겠지?
 
 };
 

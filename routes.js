@@ -34,6 +34,7 @@ const FACEBOOK_CALLBACK = "/auth/facebook/callback";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
+const DELETE_COMMENT = "/:id/comment/delete";
 
 const routes = {
 	home : HOME,
@@ -42,6 +43,7 @@ const routes = {
 	logout : LOGOUT,
 	search : SEARCH,
 	users : USERS,
+	comments: '/comments',
 	userDetail : (id) => {
 		if(id) {
 			return `/users/${id}`;
@@ -82,7 +84,14 @@ const routes = {
 	me: ME,
 	api: API,
 	registerView: REGISTER_VIEW,
-	addComment: ADD_COMMENT
+	addComment: ADD_COMMENT,
+	deleteComment: id => {
+		if(id){
+			return `/${id}/comment/delete`;
+		} else {
+			return DELETE_COMMENT;
+		}
+	}
 };
 
 export default routes;

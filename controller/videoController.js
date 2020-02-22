@@ -66,9 +66,11 @@ export const videoDetail = async (req, res) => {
 		params: { id }
 	} = req;
 	try {
-		const video = await Video.findById(id)
+		let video = await Video.findById(id)
 			.populate('creator')
 			.populate('comments');
+		video.comments.reverse();
+
 		res.render("videoDetail", { pageTitle: video.title, video });
 	} catch (error) {
 		console.log(error);
@@ -82,12 +84,13 @@ export const getEditVideo = async (req, res) => {
 	} = req;
 	try {
 		const video = await Video.findById(id);
-		if(video.creator !== req.user.id) {
+		if(!video.creator.equals(req.user.id)) {
 			throw Error();
 		} else {
 			res.render("editVideo", {pageTitle: `Edit ${video.title}`, video});
 		}
 	} catch (error) {
+		console.log(error);
 		res.redirect(routes.home);
 	}
 };
@@ -115,7 +118,7 @@ export const deleteVideo = async (req, res) => {
 	} = req;
 	try {
 		const video = await Video.findById(id);
-		if(video.creator !== req.user.id) {
+		if(!video.creator.equals(req.user.id)) {
 			throw Error();
 		} else {
 			await Video.findOneAndRemove({_id: id});
@@ -150,6 +153,7 @@ export const postAddComment = async(req, res) => {
 		body: { comment },
 		user
 	} = req;
+	// 요청을 받고 데이터베이스에 코멘트를 추가함.
 	try {
 		const video = await Video.findById(id);
 		const newComment = await Comment.create({
@@ -159,9 +163,12 @@ export const postAddComment = async(req, res) => {
 		console.log(newComment);
 		video.comments.push(newComment.id);
 		video.save();
-	} catch(error) {
+	} catch(error) { // 문제가 생겨서 에러를 ㅂ냄.
+		// 이건사실 500이 되는게 맞는거 같은데 암튼.
 		res.status(400);
 	} finally {
+		// 문제가 안생기면 별도로 200같은거 안보내고 그냥 응답을 보냄.
+		// 알아서 200이 추가됨.
 		res.end();
 	}
 };
