@@ -1,3 +1,5 @@
+import getBlobDuration from "get-blob-duration";
+
 const videoContainer = document.getElementById("jsVideoPlayer");
 const videoPlayer = document.querySelector("#jsVideoPlayer video"); //여러 함수에서 사용해야 함
 const playBtn = document.getElementById("jsPlayButton");
@@ -89,8 +91,13 @@ function getCurrentTime() {
     currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
-function setTotalTime() { 
-    const totalTimeString = formatDate(videoPlayer.duration);
+async function setTotalTime() { 
+    const blob = await fetch(videoPlayer.src).then(response => response.blob());
+
+    //file을 임시로 다운받게 함(videoPlayer.src를 받아서 서버에서 요청 후 응답을 받으면 반환)
+    const duration = await getBlobDuration(blob);
+    const totalTimeString = formatDate(duration);
+    console.log(blob, duration, totalTimeString);
     totalTime.innerHTML = totalTimeString;
     setInterval(getCurrentTime, 1000);// time get은 한 번만 일어나는 이벤트이므로 매 초마다 갱신해줌
 }
@@ -126,7 +133,9 @@ function init() {
     playBtn.addEventListener("click", handlePlayClick);
     volumeBtn.addEventListener("click", handleVolumeClick);
     fullScrnBtn.addEventListener("click", goFullScreen);
+    console.dir(videoPlayer,videoPlayer.readyState)
     if(videoPlayer.readyState >= 2){
+        console.log("이건 호출되느뇨?");
         setTotalTime();
     }  // https://bit.ly/2wa3Yjg 참조
     videoPlayer.addEventListener("ended", handleEnded);
