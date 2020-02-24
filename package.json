@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Mimiring",
   "dependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.0",
     "@babel/node": "^7.8.0",
     "@babel/polyfill": "^7.8.3",
@@ -46,8 +47,8 @@
     "dev:assets": "WEBPACK_ENV=development webpack -w",
     "build:assets": "WEBPACK_ENV=production webpack",
     "tunnel": "./node_modules/.bin/lt --port 4000",
-    "start" : "node build/init.js",
-    "prestart" : "npm run build"
+    "start": "node build/init.js",
+    "prestart": "npm run build"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
