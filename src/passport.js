@@ -7,29 +7,24 @@ import routes from "./routes";
 
 passport.use(User.createStrategy());
 
-passport.use(new GithubStrategy(
-    {
-      clientID: process.env.GH_ID,
-      clientSecret: process.env.GH_SECRET,
-      callbackURL: process.env.PRODUCTION ? `https://mimiringtube.herokuapp.com/&{routes.githubCallback}` : `http://localhost:4000${routes.githubCallback}`
-    },
-    githubLoginCallback
-  )
-);
+const GithubStrategyOptions = isDev => ({
+  clientID: isDev ? process.env.GH_ID_DEV : process.env.GH_ID,
+  clientSecret: isDev ? process.env.GH_SECRET_DEV : process.env.GH_SECRET,
+  callbackURL: isDev ? `http://localhost:4000${routes.githubCallback}` : `https://mimiringtube.herokuapp.com${routes.githubCallback}`
+});
+passport.use(new GithubStrategy(GithubStrategyOptions(!process.env.PRODUCTION), githubLoginCallback));
 
-passport.use(new FacebookStrategy(
-  {
+const FacebookStrategyOptions = isDev => {
+  return {
     clientID: process.env.FB_ID,
     clientSecret: process.env.FB_SECRET,
-    callbackURL: `https://chatty-wombat-10.localtunnel.me${
-      routes.facebookCallback
-    }`,
+    callbackURL: isDev ? `http://localhost:4000${routes.facebookCallback}` : `https://mimiringtube.herokuapp.com${routes.facebookCallback}`,
     profileFields: ["id", "displayName", "photos", "email"],
     scope: ["public_profile", "email"]
-  },
-  facebookLoginCallback
-  )
-);
+  };
+}
+
+passport.use(new FacebookStrategy(FacebookStrategyOptions(!process.env.PRODUCTION), facebookLoginCallback));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
