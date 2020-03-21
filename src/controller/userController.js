@@ -54,7 +54,7 @@ export const githubLogin = passport.authenticate("github", {
 
 export const githubLoginCallback = async(_, __, profile, cb) => { // 함수의 parameter 중 사용하지 않는 것들은 _, __ 처리. 자리는 채워야 하므로
 	const {
-		_json: {id, avatar_url: avatarUrl, name, email}
+		_json: {id: githubId, avatar_url: avatarUrl, name, email}
 	} = profile;
 	try {
 		const user = await User.findOne({ email });
@@ -64,15 +64,14 @@ export const githubLoginCallback = async(_, __, profile, cb) => { // 함수의 p
 			return cb(null, user);
 		} else {
 			const newUser = await User.create({
-			email,
-			name,
-			githubId: id,
-			avatarUrl: avatar_url
+				email,
+				name,
+				githubId,
+				avatarUrl
 			});
 			return cb(null, newUser);
 		}
-	}
-	catch(errror) {
+	} catch(error) {
 		return cb(error);
 	}
 };
