@@ -56,10 +56,11 @@ export const githubLoginCallback = async(_, __, profile, cb) => { // 함수의 p
 	const {
 		_json: {id: githubId, avatar_url: avatarUrl, name, email}
 	} = profile;
+	console.log(profile);
 	try {
 		const user = await User.findOne({ email });
 		if(user) {
-			user.githubId = id;
+			user.githubId = githubId;
 			user.save();
 			return cb(null, user);
 		} else {
