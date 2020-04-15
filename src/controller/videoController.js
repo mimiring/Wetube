@@ -6,13 +6,13 @@ export const home = async (req, res) => {
 	try {
 		const videos = await Video.find({}).sort({_id: -1});
 		//id 정렬을 -1로 하면 최근에 올린 영상이 위로 올라옴
-		res.render("home", {
+		res.render("home.ejs", {
 			pageTitle: "Home",
 			videos
 		});
 	} catch (error) {
 		console.log(error);
-		res.render("home", {
+		res.render("home.ejs", {
 			pageTitle: "Home",
 			videos: []
 		});
