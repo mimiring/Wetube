@@ -163,12 +163,11 @@ export const postAddComment = async(req, res) => {
 		console.log(newComment);
 		video.comments.push(newComment.id);
 		video.save();
+		// 문제가 안생기면 별도로 200같은거 안보내고 그냥 응답을 보냄.
+		// 알아서 200이 추가됨.
+		res.json({ comment: newComment });
 	} catch(error) { // 문제가 생겨서 에러를 ㅂ냄.
 		// 이건사실 500이 되는게 맞는거 같은데 암튼.
 		res.status(400);
-	} finally {
-		// 문제가 안생기면 별도로 200같은거 안보내고 그냥 응답을 보냄.
-		// 알아서 200이 추가됨.
-		res.end();
 	}
 };
