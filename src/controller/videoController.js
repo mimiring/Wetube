@@ -71,7 +71,7 @@ export const videoDetail = async (req, res) => {
 			.populate('comments');
 		video.comments.reverse();
 
-		res.render("videoDetail", { pageTitle: video.title, video });
+		res.render("videoDetail.ejs", { pageTitle: video.title, video });
 	} catch (error) {
 		console.log(error);
 		res.redirect(routes.home); //유효하지 않은 id값의 URL로 이동 시 home으로 redirect
