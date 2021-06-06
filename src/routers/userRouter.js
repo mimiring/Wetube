@@ -1,11 +1,11 @@
 import express from "express";
 import routes from "../routes";
 import {
-	userDetail,
-	getEditProfile,
-	postEditProfile,
-	getChangePassword,
-	postChangePassword
+  userDetail,
+  getEditProfile,
+  postEditProfile,
+  getChangePassword,
+  postChangePassword,
 } from "../controller/userController";
 import { onlyPrivate, uploadAvater } from "../middlewares";
 

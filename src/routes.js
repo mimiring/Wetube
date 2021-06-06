@@ -18,7 +18,7 @@ const VIDEOS = "/videos";
 const UPLOAD = "/upload";
 const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
-const DELETE_VIDEO= "/:id/delete";
+const DELETE_VIDEO = "/:id/delete";
 
 //Github
 
@@ -37,61 +37,60 @@ const ADD_COMMENT = "/:id/comment";
 const DELETE_COMMENT = "/:id/comment/delete";
 
 const routes = {
-	home : HOME,
-	join : JOIN,
-	login : LOGIN,
-	logout : LOGOUT,
-	search : SEARCH,
-	users : USERS,
-	comments: '/comments',
-	userDetail : (id) => {
-		if(id) {
-			return `/users/${id}`;
-		} else {
-			return USER_DETAIL;
-		}
-	},		
-	changePassword : CHANGE_PASSWORD,
-	videos : VIDEOS,
-	upload : UPLOAD,
-	videoDetail : (id) => {
-		if(id) {
-			return `/videos/${id}`;
-		}
-		else {
-			return VIDEO_DETAIL;
-		}
-	},
-	editVideo: id => {
-		if (id) {
-			return `/videos/${id}/edit`;
-		} else {
-			return EDIT_VIDEO;
-		}
-	},
-	editProfile : EDIT_PROFILE,
-	deleteVideo : id => {
-		if(id) {
-			return `/videos/${id}/delete`
-		} else {
-			return DELETE_VIDEO;
-		}
-	},
-	github: GITHUB,
-	githubCallback: GITHUB_CALLBACK,
-	facebook: FACEBOOK,
-	facebookCallback: FACEBOOK_CALLBACK,
-	me: ME,
-	api: API,
-	registerView: REGISTER_VIEW,
-	addComment: ADD_COMMENT,
-	deleteComment: id => {
-		if(id){
-			return `/${id}/comment/delete`;
-		} else {
-			return DELETE_COMMENT;
-		}
-	}
+  home: HOME,
+  join: JOIN,
+  login: LOGIN,
+  logout: LOGOUT,
+  search: SEARCH,
+  users: USERS,
+  comments: "/comments",
+  userDetail: (id) => {
+    if (id) {
+      return `/users/${id}`;
+    } else {
+      return USER_DETAIL;
+    }
+  },
+  changePassword: CHANGE_PASSWORD,
+  videos: VIDEOS,
+  upload: UPLOAD,
+  videoDetail: (id) => {
+    if (id) {
+      return `/videos/${id}`;
+    } else {
+      return VIDEO_DETAIL;
+    }
+  },
+  editVideo: (id) => {
+    if (id) {
+      return `/videos/${id}/edit`;
+    } else {
+      return EDIT_VIDEO;
+    }
+  },
+  editProfile: EDIT_PROFILE,
+  deleteVideo: (id) => {
+    if (id) {
+      return `/videos/${id}/delete`;
+    } else {
+      return DELETE_VIDEO;
+    }
+  },
+  github: GITHUB,
+  githubCallback: GITHUB_CALLBACK,
+  facebook: FACEBOOK,
+  facebookCallback: FACEBOOK_CALLBACK,
+  me: ME,
+  api: API,
+  registerView: REGISTER_VIEW,
+  addComment: ADD_COMMENT,
+  deleteComment: (id) => {
+    if (id) {
+      return `/${id}/comment/delete`;
+    } else {
+      return DELETE_COMMENT;
+    }
+  },
 };
 
 export default routes;

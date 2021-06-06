@@ -128,12 +128,11 @@ a {
 }
 
 *,
-
 input {
   border: none;
   box-sizing: border-box;
   &:focus,
   &:active {
-  outline:none
+    outline: none;
   }
 }
