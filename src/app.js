@@ -33,6 +33,7 @@ const app = express(); // const app = createApplication();
 
 app.use(helmet()); // response header에 보안관련된 항목을 추가해줌.
 app.set("view engine", "pug"); // ejs, pug등 view engine설정
+app.set("view engine", "ejs"); // ejs추가
 // app.set("views","views"); // view 폴더 지정.
 app.set("views", path.join(__dirname, "views"));
 // app.use("/uploads", express.static("uploads")); //AWS S3에 upload 하므로 불필요

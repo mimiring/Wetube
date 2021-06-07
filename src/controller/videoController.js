@@ -6,13 +6,13 @@ export const home = async (req, res) => {
   try {
     const videos = await Video.find({}).sort({ _id: -1 });
     //id 정렬을 -1로 하면 최근에 올린 영상이 위로 올라옴
-    res.render("home", {
+    res.render("home.ejs", {
       pageTitle: "Home",
       videos,
     });
   } catch (error) {
     console.log(error);
-    res.render("home", {
+    res.render("home.ejs", {
       pageTitle: "Home",
       videos: [],
     });
@@ -70,7 +70,7 @@ export const videoDetail = async (req, res) => {
       .populate("comments");
     video.comments.reverse();
 
-    res.render("videoDetail", { pageTitle: video.title, video });
+    res.render("videoDetail.ejs", { pageTitle: video.title, video });
   } catch (error) {
     console.log(error);
     res.redirect(routes.home); //유효하지 않은 id값의 URL로 이동 시 home으로 redirect

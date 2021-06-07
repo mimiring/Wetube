@@ -1,0 +1,43 @@
+<%- include('./layouts/Header', { pageTitle }) %>
+<div class="video-detail_container">
+  <%- include('./mixins/videoPlayer', {
+    video: {
+      src: video.fileUrl
+    }
+  }) %>
+  <div class="video_info">
+    <% if(loggedUser && video.creator.id === loggedUser.id) { %>
+      <a href="<%=routes.editVideo%>">
+        <span>Edit video</span>
+      </a>
+    <% } %>
+    <h5 class="video_title"></h5>
+    <p class="video_description"></p>
+    <span class="video_views"><%=video.views%> views</span>
+    <div class="video_author">
+      <a href="<%=routes.userDetail(video.creator.id)%>">
+        <%=video.creator.name%>
+      </a>
+    </div>
+  </div>
+  
+  <div class="video_comments">
+    <span class="video_comment-number">
+      <span id="jsCommentNumber"><%=video.comments.length%></span>
+      |   comments</span>
+    <form class="add_comment" id="jsAddComment">
+      <input type="text" placeholder="Add a commnet">
+    </form>
+    <ul class="video_comments-list" id="jsCommentList">
+      <%video.comments.forEach(function(comment) {%>
+        <li>
+          <span><%=comment.text%></span>
+          <% if(loggedUser && comment.creator.equals(loggedUser.id)) {%>
+            <a class="delete-comment_btns" href="#" data-comment-id=<%=comment.id%>>X</a>
+          <% } %>
+        </li>
+      <% }); %>  
+    </ul>
+  </div>
+</div>
+<%- include('./layouts/Footer') %>

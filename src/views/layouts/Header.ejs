@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+    <title><%=pageTitle + siteName%></title>
+</head>
+<body>
+    <%- include('../mixins/message') %>
+    <header class="header">
+        <div class="header_wrapper">
+            <div class="header_column">
+                <a href=<%=routes.home%>><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="header_column">
+                <form action=<%=routes.search%> method="get">
+                    <input type="text" placeholder="Search by term..." name="term">
+                </form>
+            </div>
+            <div class="header_column">
+                <ul>
+                    <% if(!loggedUser){%>
+                        <li>
+                            <a href=<%=routes.join%>>Join</a>
+                        </li>
+                        <li>
+                            <a href=<%=routes.login%>>Log In</a>
+                        </li>
+                    <%} else {%>
+                        <li>
+                            <a href="/videos<%=routes.upload%>">Join</a>
+                        </li>
+                        <li>
+                            <a href=<%=routes.me%>>Profile</a>
+                        </li>
+                        <li>
+                            <a href=<%=routes.logout%>>Log Out</a>
+                        </li>
+                    <%}%>
+                </ul>
+            </div>
+        </div> 
+    </header>
+    <main>
