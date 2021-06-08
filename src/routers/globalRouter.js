@@ -4,7 +4,6 @@ import routes from "../routes";
 import { home, search } from "../controller/videoController";
 import {
   getJoin,
-  login,
   logout,
   postJoin,
   getLogin,
