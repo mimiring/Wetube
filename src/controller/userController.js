@@ -11,7 +11,7 @@ export const getJoin = (req, res) => {
   // if(req.body.password.length < 13){
   // 	res.render("join", { pageTitle: "Join", answer: "회원가입성공못했음~! 짧음!비버언" });
   // }
-  res.render("join", { pageTitle: "Join" });
+  res.render("join.ejs", { pageTitle: "Join" });
 };
 
 export const postJoin = async (req, res, next) => {
@@ -21,7 +21,7 @@ export const postJoin = async (req, res, next) => {
   if (password != password2) {
     req.flash("error", "Password dosent match!");
     res.status(400);
-    res.render("join", { pageTitle: "Join" });
+    res.render("join.ejs", { pageTitle: "Join" });
   } else {
     try {
       const user = await User({
@@ -125,7 +125,7 @@ export const logout = (req, res) => {
 };
 
 export const getMe = (req, res) => {
-  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+  res.render("userDetail.ejs", { pageTitle: "User Detail", user: req.user });
   //현재 로그인한 user로 연결
 };
 
@@ -136,7 +136,7 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     const user = await User.findById(id).populate("videos");
-    res.render("userDetail", { pageTitle: "User Detail", user });
+    res.render("userDetail.ejs", { pageTitle: "User Detail", user });
   } catch (error) {
     req.flash("error", "User not found.");
     res.redirect(routes.home);
@@ -162,7 +162,7 @@ export const postEditProfile = async (req, res) => {
   }
 };
 export const getEditProfile = (req, res) =>
-  res.render("editProfile", { pageTitle: "Edit Profile" });
+  res.render("editProfile.ejs", { pageTitle: "Edit Profile" });
 
 export const getChangePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });

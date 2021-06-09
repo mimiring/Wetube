@@ -1,13 +1,13 @@
 <%if(messages.error){%>
     <div class="flash-message__container error">
-        <span class="flash-message__text"><%=message.error%></span>
+        <span class="flash-message__text"><%=messages.error%></span>
     </div>
 <%} else if (messages.info){%>
     <div class="flash-message__container info">
-        <span class="flash-message__text"><%=message.info%></span>
+        <span class="flash-message__text"><%=messages.info%></span>
     </div>
 <%} else if(messages.success){%>
     <div class="flash-message__container success">
-        <span class="flash-message__text"><%=message.success%></span>
+        <span class="flash-message__text"><%=messages.success%></span>
     </div>
 <%}%>

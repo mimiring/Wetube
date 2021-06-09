@@ -33,11 +33,11 @@ export const search = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-  res.render("search", { pageTitle: "Search", searchingBy, videos });
+  res.render("search.ejs", { pageTitle: "Search", searchingBy, videos });
 };
 
 export const getUpload = (req, res) =>
-  res.render("upload", {
+  res.render("upload.ejs", {
     pageTitle: "Upload",
   });
 

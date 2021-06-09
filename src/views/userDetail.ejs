@@ -1,0 +1,28 @@
+<%- include('./layouts/Header', { pageTitle }) %>
+<div class="user-profile">
+  <div class="user-profile__header">
+    <img class="u-avatar" src="<%= user.avatarUrl %>" />
+    <h4 class="profile__username"><%= user.name %></h4>
+  </div>
+  <% if(user.id === loggedUser.id) { %>
+    <div class="user-profile__btns">
+      <a href="/users<%=routes.editProfile%>">
+        ✏️ Edit Profile
+      </a>
+      <a href="/users<%=routes.changePassword%>">Change Password</a>
+    </div>
+  <% } %>
+  <div class="uploaded-videos">
+    <% user.videos.forEach(function(item) {%>
+      <%- include('./mixins/videoBlock', {
+        video: {
+          id: item._id,
+          title: item.title,
+          views: item.views,
+          videoFile: item.fileUrl
+        }
+      }) %>
+    <% }) %>
+  </div>
+</div>
+<%- include('./layouts/Footer') %>

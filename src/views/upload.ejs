@@ -1,0 +1,17 @@
+<%- include('./layouts/Header', { pageTitle }) %>
+<div class="form-container">
+	<div class="record-container" id="jsRecordContainer">
+    <video src="" id="jsVideoPreview"></video>
+    <button id="jsRecordBtn">Start Recording</button>
+  </div>
+  <form action="/videos<%= routes.upload %>" method="POST" enctype="multipart/form-data">
+    <div class="fileUpload">
+      <label for="file">Video File</label>
+      <input type="file" id="file" name="videoFile" required="true" accept="video/*" />
+    </div>
+    <input type="text" placeholder="title" name="title" required="true" />
+    <textarea placeholder="Description" name="description" required="true"></textarea>
+		<input type="submit" value="Update Video" />
+  </form>
+</div>
+<%- include('./layouts/Footer') %>
