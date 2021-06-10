@@ -165,7 +165,7 @@ export const getEditProfile = (req, res) =>
   res.render("editProfile.ejs", { pageTitle: "Edit Profile" });
 
 export const getChangePassword = (req, res) =>
-  res.render("changePassword", { pageTitle: "Change Password" });
+  res.render("changePassword.ejs", { pageTitle: "Change Password" });
 export const postChangePassword = async (req, res) => {
   const {
     body: { oldPassword, newPassword, newPassword1 },

@@ -7,7 +7,7 @@
   }) %>
   <div class="video_info">
     <% if(loggedUser && video.creator.id === loggedUser.id) { %>
-      <a href="<%=routes.editVideo%>">
+      <a href="<%=routes.editVideo(video.id)%>">
         <span>Edit video</span>
       </a>
     <% } %>

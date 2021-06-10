@@ -86,7 +86,12 @@ export const getEditVideo = async (req, res) => {
     if (!video.creator.equals(req.user.id)) {
       throw Error();
     } else {
-      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+      res.render("editVideo.ejs", {
+        pageTitle: `Edit ${video.title}`,
+        video,
+        editVideoUrl: routes.editVideo(video.id),
+        deleteVideoUrl: routes.deleteVideo(video.id),
+      });
     }
   } catch (error) {
     console.log(error);

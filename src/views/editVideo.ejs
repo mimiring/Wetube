@@ -1,0 +1,10 @@
+<%- include('./layouts/Header', { pageTitle }) %>
+<div class="form-container">
+  <form action="<%=editVideoUrl%>" method="post">
+    <input type="text" placeholder="title" name="title" value="<%=video.title%>" />
+    <textarea name="description" placeholder="Description"><%=video.description%></textarea> 
+    <input type="submit" value="Update Video" />
+  </form>
+  <a class="form-container_link" href="<%=deleteVideoUrl%>">Delete Video</a>
+</div>
+<%- include('./layouts/Footer') %>
