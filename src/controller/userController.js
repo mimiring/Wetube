@@ -42,7 +42,7 @@ export const postJoin = async (req, res, next) => {
 export const getLogin = (req, res) =>
   res.render("login.ejs", { pageTitle: "Login" });
 export const postLogin = passport.authenticate("local", {
-  failureRedirect: routes.login, // 로그인 실패한 경우
+  failureRedirect: "/auth" + routes.login, // 로그인 실패한 경우
   successRedirect: routes.home, // 로그인 성공한 경우성공해서 홈으로 가는거 같은데 세션유지가 안되는듯!
   successFlash: "Welcome!",
   failureFlash: "Can't login. Check your Email or Password.",

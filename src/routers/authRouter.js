@@ -9,7 +9,6 @@ import {
   postLogin,
   githubLogin,
   postGithubLogin,
-  getMe,
   facebookLogin,
   postFacebookLogin,
 } from "../controller/userController";
@@ -29,17 +28,15 @@ authRouter.get(routes.github, githubLogin);
 
 authRouter.get(
   routes.githubCallback,
-  passport.authenticate("github", { failureRedirect: "/login" }),
+  passport.authenticate("github", { failureRedirect: "/auth/login" }),
   postGithubLogin
 );
 
 authRouter.get(routes.facebook, facebookLogin);
 authRouter.get(
   routes.facebookCallback,
-  passport.authenticate("facebook", { failureRedirect: "/login" }),
+  passport.authenticate("facebook", { failureRedirect: "/auth/login" }),
   postFacebookLogin
 );
-
-authRouter.get(routes.me, getMe);
 
 export default authRouter;

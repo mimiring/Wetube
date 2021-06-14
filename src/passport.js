@@ -14,8 +14,8 @@ const GithubStrategyOptions = (isDev) => ({
   clientID: isDev ? process.env.GH_ID_DEV : process.env.GH_ID,
   clientSecret: isDev ? process.env.GH_SECRET_DEV : process.env.GH_SECRET,
   callbackURL: isDev
-    ? `http://localhost:4000${routes.githubCallback}`
-    : `https://mimiringtube.herokuapp.com${routes.githubCallback}`,
+    ? `http://localhost:4000/auth${routes.githubCallback}`
+    : `https://mimiringtube.herokuapp.com/auth${routes.githubCallback}`,
 });
 passport.use(
   new GithubStrategy(
@@ -29,8 +29,8 @@ const FacebookStrategyOptions = (isDev) => {
     clientID: process.env.FB_ID,
     clientSecret: process.env.FB_SECRET,
     callbackURL: isDev
-      ? `http://localhost:4000${routes.facebookCallback}`
-      : `https://mimiringtube.herokuapp.com${routes.facebookCallback}`,
+      ? `http://localhost:4000/auth${routes.facebookCallback}`
+      : `https://mimiringtube.herokuapp.com/auth${routes.facebookCallback}`,
     profileFields: ["id", "displayName", "photos", "email"],
     scope: ["public_profile", "email"],
   };
