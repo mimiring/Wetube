@@ -11,6 +11,7 @@ import { localsMiddleware } from "./middlewares";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import authRouter from "./routers/authRouter";
 import apiRouter from "./routers/apiRouter";
 // import commentRouter from './routers/commentRouter';
 import routes from "./routes";
@@ -56,6 +57,7 @@ app.use(passport.session());
 app.use(localsMiddleware); // middleware는 req -> middleware -> res
 
 app.use(routes.home, globalRouter);
+app.use(routes.home, authRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
 app.use(routes.api, apiRouter);
