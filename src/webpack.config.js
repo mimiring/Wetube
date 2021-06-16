@@ -25,9 +25,7 @@ const config = {
           "css-loader",
           {
             loader: "postcss-loader",
-            options: {
-              
-            },
+            options: {},
           },
           "sass-loader",
         ],
@@ -43,6 +41,7 @@ const config = {
       filename: "style.css",
     }),
   ],
+  devtool: "cheap-module-source-map",
 };
 
 module.exports = config; //export default 할 수 없으므로 옛날 문법으로 작성
